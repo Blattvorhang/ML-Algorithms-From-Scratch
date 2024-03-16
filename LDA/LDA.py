@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 
 class LDA:
-    '''
+    """
     Linear Discriminant Analysis (LDA) classifier.
-    '''
+    """
     X0: np.ndarray  # data points of positive class
     X1: np.ndarray  # data points of negative class
     w: np.ndarray   # projection line, w = (w1, w2), normalized
