@@ -24,4 +24,4 @@ Please implement Linear Discriminant Analysis (LDA) using Python programming and
 |     18 |    0.557    |    0.216    | Negative |
 
 ## Answer
-![](LDA.png)
+![](LDA.svg)

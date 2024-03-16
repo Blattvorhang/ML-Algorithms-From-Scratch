@@ -36,14 +36,14 @@ class LDA:
         Plot the data points, projection points, perpendicular lines, and projection line.
         """
         # data points
-        plt.scatter(self.X1[:, 0], self.X1[:, 1], label='positive', marker='+')
+        plt.scatter(self.X1[:, 0], self.X1[:, 1], label='positive', marker='o')
         plt.scatter(self.X0[:, 0], self.X0[:, 1], label='negative', marker='x')
         
         # projection points
         proj0 = self.X0.dot(self.w)
         proj1 = self.X1.dot(self.w)
-        plt.scatter(self.w[0] * proj1, self.w[1] * proj1, label='projection of positive', marker='+')
-        plt.scatter(self.w[0] * proj0, self.w[1] * proj0, label='projection of negative', marker='x')
+        plt.scatter(self.w[0] * proj1, self.w[1] * proj1, label='projection of positive', marker='^')
+        plt.scatter(self.w[0] * proj0, self.w[1] * proj0, label='projection of negative', marker='s')
         
         # perpendicular lines
         for i in range(len(proj1)):
