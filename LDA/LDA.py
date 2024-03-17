@@ -24,12 +24,10 @@ class LDA:
         self.__plot()
 
     def predict(self, X):
-        # TODO: Implement the prediction function, which returns the predicted label for the input data
-        pass
-
-    def evaluate(self, X_test, y_test):
-        # TODO: Implement the evaluation function, which returns the accuracy of the model
-        pass
+        proj = X.dot(self.w)
+        proj0 = self.mu0.dot(self.w)
+        proj1 = self.mu1.dot(self.w)
+        return np.where(np.abs(proj - proj0) < np.abs(proj - proj1), 0, 1)
     
     def __plot(self):
         """
@@ -42,14 +40,18 @@ class LDA:
         # projection points
         proj0 = self.X0.dot(self.w)
         proj1 = self.X1.dot(self.w)
-        plt.scatter(self.w[0] * proj1, self.w[1] * proj1, label='projection of positive', marker='^')
-        plt.scatter(self.w[0] * proj0, self.w[1] * proj0, label='projection of negative', marker='s')
+        plt.scatter(self.w[0] * proj1, self.w[1] * proj1, color='g', label='projection of positive', marker='o')
+        plt.scatter(self.w[0] * proj0, self.w[1] * proj0, color='r', label='projection of negative', marker='x')
         
         # perpendicular lines
         for i in range(len(proj1)):
-            plt.plot([self.X1[i, 0], self.w[0] * proj1[i]], [self.X1[i, 1], self.w[1] * proj1[i]], 'g--', lw=0.5)
+            plt.plot([self.X1[i, 0], self.w[0] * proj1[i]], [self.X1[i, 1], self.w[1] * proj1[i]], 'g--', lw=0.4)
         for i in range(len(proj0)):
-            plt.plot([self.X0[i, 0], self.w[0] * proj0[i]], [self.X0[i, 1], self.w[1] * proj0[i]], 'r--', lw=0.5)
+            plt.plot([self.X0[i, 0], self.w[0] * proj0[i]], [self.X0[i, 1], self.w[1] * proj0[i]], 'r--', lw=0.4)
+            
+        # center of each class
+        plt.scatter(self.mu1[0], self.mu1[1], label='$\mu_1$', marker='^')
+        plt.scatter(self.mu0[0], self.mu0[1], label='$\mu_0$', marker='s')
         
         # set x- and y-axis limits
         # concatenate all x and y coordinates of data points and projection points
@@ -63,9 +65,16 @@ class LDA:
         
         # projection line
         slope = self.w[1] / self.w[0]
-        line_x = np.array(plt.xlim())  # specific x range, you can change it to fit your data
+        line_x = np.array(plt.xlim())
         line_y = slope * line_x
         plt.plot(line_x, line_y, color='black', lw=1)
+        
+        # decision boundary
+        boundary_point = (self.mu0 + self.mu1) / 2
+        boundary_slope = -1 / slope
+        boundary_line_x = np.array(plt.xlim())
+        boundary_line_y = boundary_slope * (boundary_line_x - boundary_point[0]) + boundary_point[1]
+        plt.plot(boundary_line_x, boundary_line_y, color='blueviolet', lw=2, ls='-.', label='decision boundary')
         
         plt.title('LDA')
         plt.xlabel('$x_1$')
