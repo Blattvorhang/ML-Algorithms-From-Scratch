@@ -15,7 +15,7 @@ class LDA:
         self.X1 = None
         self.w = None
 
-    def train(self, X_train, y_train):
+    def fit(self, X_train, y_train):
         self.X0 = X_train[y_train == 0]
         self.X1 = X_train[y_train == 1]
         Sw = np.cov(self.X0.T) + np.cov(self.X1.T)
@@ -117,4 +117,4 @@ if __name__ == "__main__":
     X = data[:, :-1]  # attributes
     y = data[:, -1]   # labels
 
-    model.train(X, y)
+    model.fit(X, y)
