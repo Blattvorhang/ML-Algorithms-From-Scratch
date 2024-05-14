@@ -1,6 +1,6 @@
 # ML-Exercises
 
-- Linear Models
-  - [LDA (Linear Discriminant Analysis)](./LDA/)
+- [LDA (Linear Discriminant Analysis)](./LDA/)
 - [Decision Tree](./decision_tree/)
-- [SVM](./SVM/)
+- [SVM (Support Vector Machine)](./SVM/)
+- [Naïve Bayes](./naive_bayes/)
