@@ -20,4 +20,4 @@ Note: Scikit-learn is not used in this repository.
 - [Decision Tree](./decision_tree/)
 - [SVM (Support Vector Machine)](./SVM/)
 - [Naïve Bayes](./naive_bayes/)
-- [K-Means and K-Means++](./k_means/)
+- [K-Means and K-Means++](./k-means/)
